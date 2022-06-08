@@ -21,16 +21,15 @@
                     </div>
                 <?php } ?>
                 <div class="mb-3">
-                    <label for="tel" class="form-label">Login</label>
-                    <input type="text" class="form-control" id="tel" name="password">
+                    <label for="username" class="form-label">Login</label>
+                    <input type="text" class="form-control" id="username" name="username">
                 </div>
-
                 <div class="mb-3">
-                    <label for="tel" class="form-label">Mot de passe</label>
+                    <label for="password" class="form-label">Mot de passe</label>
                     <input type="password" class="form-control" name="password" id="password">
                 </div>
 
-                <button type="submit" class="btn btn-primary" name="submit">Envoyer</button>
+                <button type="submit" class="btn btn-primary" name="submit" value="submit">Envoyer</button>
             </form>
         </div>
     </div>

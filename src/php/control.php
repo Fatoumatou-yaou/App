@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-include("../Connexion/connexion.php");
-if (isset($_POST['username']) && (isset($_POST['mdp']))) {
+include "../Connexion/connexion.php";
+if (isset($_POST['username']) && (isset($_POST['password']))) {
     function test_input($data)
     {
         $data = trim($data);
@@ -11,29 +11,26 @@ if (isset($_POST['username']) && (isset($_POST['mdp']))) {
         return $data;
     }
     $username = test_input($_POST['username']);
-    $mdp = test_input($_POST['mdp']);
+    $password = test_input($_POST['password']);
 
     if (empty($username)) {
         header("Location:../index.php?error=Le login est obligatoire!");
-    } else if (empty($mdp)) {
+    } else if (empty($password)) {
         header("Location:../index.php?error=Le mot de passe est obligatoire!");
     } else {
-
         $password = sha1($password);
-
-        $query = "SELECT * FROM users WHERE username='$username' AND mdp='$mdp';";
+        $query = "SELECT * FROM users WHERE username='$username' AND password='$password';";
         $result = mysqli_query($connexion, $query);
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-            if ($row['mdp'] === $mdp && $row['username'] === $username) {
+            if ($row['password'] === $password && $row['username'] === $username) {
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['username'] = $row['username'];
-                $_SESSION['mdp'] = $row['mdp'];
-
-                header("Location:../home.php");
-            } else {
-                header("Location:../index.php?error=Login ou mot de passe incorrects!");
+                $_SESSION['password'] = $row['password'];
+                header("Location:../php/home.php");
             }
+        } else {
+            header("Location:../index.php?error=Login ou mot de passe incorrects!");
         }
     }
 } else {
